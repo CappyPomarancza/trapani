@@ -24,7 +24,7 @@ export async function sendEmail({ from, to, days }: SendEmailPayload) {
     from_date: fromFormatted,
     to_date: toFormatted,
     days_count: days,
-    subject: `🎂 Sto lat: ${fromFormatted} – ${toFormatted}`,
+    subject: "🎂 Wszystkiego najlepszego!",
   }
 
   if (!TO_EMAIL) {
