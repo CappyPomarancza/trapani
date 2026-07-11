@@ -8,7 +8,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
 } from "@/components/ui/dialog"
 import type { DateRange } from "react-day-picker"
 
@@ -45,9 +44,9 @@ export function DateRangePicker({ open, onOpenChange, onRangeValid }: DateRangeP
     if (selected?.from && selected?.to) {
       const days = differenceInCalendarDays(selected.to, selected.from)
       if (days < 2) {
-        setError("Co najmniej 3 dni — nie uciekniesz szybciej.")
+        setError("Wybierz minimalnie 3 dni")
       } else if (days > 3) {
-        setError("4 dni w zupełności wystarczy.")
+        setError("Wybierz maksymalnie 4 dni")
       }
     }
   }
@@ -57,8 +56,10 @@ export function DateRangePicker({ open, onOpenChange, onRangeValid }: DateRangeP
       const days = differenceInCalendarDays(range.to, range.from)
       if (days >= 2 && days <= 3) {
         onRangeValid(range)
+      } else if (days < 2) {
+        setError("Wybierz minimalnie 3 dni")
       } else {
-        setError("Tylko 3 albo 4 dni. Żadnych kompromisów.")
+        setError("Wybierz maksymalnie 4 dni")
       }
     }
   }
@@ -67,10 +68,7 @@ export function DateRangePicker({ open, onOpenChange, onRangeValid }: DateRangeP
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Kiedy uciekasz?</DialogTitle>
-          <DialogDescription>
-            3 albo 4 dni. Tyle potrzebujesz.
-          </DialogDescription>
+          <DialogTitle>Data realizacji prezentu</DialogTitle>
         </DialogHeader>
         <div className="flex justify-center overflow-x-auto -mx-2 px-2">
           <Calendar
@@ -100,7 +98,7 @@ export function DateRangePicker({ open, onOpenChange, onRangeValid }: DateRangeP
         )}
         {range?.from && range?.to && (
           <Button onClick={handleConfirm} className="w-full rounded-xl">
-            Te daty są dobre
+            Te daty pasują
           </Button>
         )}
       </DialogContent>
