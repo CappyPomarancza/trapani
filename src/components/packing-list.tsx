@@ -7,18 +7,18 @@ interface PackingListProps {
 }
 
 const bring = [
-  { icon: "😊", item: "Uśmiech", desc: "najważniejszy bagaż podręczny" },
-  { icon: "🌟", item: "Pozytywne nastawienie", desc: "reszta ułoży się sama" },
-  { icon: "🍽️", item: "Apetyt", desc: "na nowe smaki i niespodzianki" },
-  { icon: "🩴", item: "Klapki", desc: "sprawdzone w boju, obtarte z miłością — drugi raz nie dadzą rady" },
-  { icon: "🩹", item: "Plaster", desc: "na pęcherze i na chwilowe zwątpienia" },
-  { icon: "🎒", item: "Otwarta głowa", desc: "na ludzi, miejsca i przypadki" },
+  { icon: "😊", item: "Uśmiech", desc: "od ucha do ucha" },
+  { icon: "🎒", item: "Otwarta głowa", desc: "na niespodzianki, które czekają za rogiem" },
+  { icon: "🍽️", item: "Apetyt", desc: "aby nowe doświadczenia i potrawy smakowały jeszcze lepiej" },
+  { icon: "🎵", item: "Dobry nastrój", desc: "wejście z energią to połowa sukcesu" },
+  { icon: "📸", item: "Pamięć", desc: "albo aparat — to trzeba uwiecznić" },
 ]
 
 const dontBring = [
-  { icon: "😰", item: "Wyimaginowane obawy", desc: "nie zmieszczą się do plecaka" },
-  { icon: "🤔", item: "Nieuzasadnione zmartwienia", desc: "przedłużają pobyt w domu" },
-  { icon: "📋", item: "Lista rzeczy, które mogą pójść nie tak", desc: "oszczędź sobie czytania" },
+  { icon: "😰", item: "Obawy", desc: "to tylko wyimaginowany strach" },
+  { icon: "🔨", item: "Plany remontowe", desc: "to będzie czas na odpoczynek" },
+  { icon: "📋", item: "Lista rzeczy do zrobienia", desc: "nie teraz — odpuść" },
+  { icon: "⏰", item: "Zegarek", desc: "niepotrzebnie zaburza równomierne opalanie" },
 ]
 
 function SectionCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {

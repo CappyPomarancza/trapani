@@ -6,10 +6,10 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
+import { Loader2 } from "lucide-react"
 import type { DateRange } from "react-day-picker"
 
 interface ConfirmationModalProps {
@@ -17,24 +17,22 @@ interface ConfirmationModalProps {
   range: DateRange
   onConfirm: () => void
   onCancel: () => void
+  sending?: boolean
 }
 
-export function ConfirmationModal({ open, range, onConfirm, onCancel }: ConfirmationModalProps) {
+export function ConfirmationModal({ open, range, onConfirm, onCancel, sending }: ConfirmationModalProps) {
   if (!range.from || !range.to) return null
 
   const days = differenceInCalendarDays(range.to, range.from) + 1
 
   return (
-    <Dialog open={open} onOpenChange={(o) => { if (!o) onCancel() }}>
+    <Dialog open={open} onOpenChange={(o) => { if (!o && !sending) onCancel() }}>
       <DialogContent>
         <DialogHeader>
           <div className="mx-auto size-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-2">
-            <span className="text-2xl">✈️</span>
+            <span className="text-2xl">🎁</span>
           </div>
-          <DialogTitle className="text-center">Jesteś pewna?</DialogTitle>
-          <DialogDescription className="text-center">
-            Przed Tobą {days} dni wolności. Gotowa?
-          </DialogDescription>
+          <DialogTitle className="text-center">Gotowa na nieznane?</DialogTitle>
         </DialogHeader>
         <div className="py-4">
           <div className="rounded-2xl border bg-muted/50 p-4 text-center">
@@ -56,11 +54,12 @@ export function ConfirmationModal({ open, range, onConfirm, onCancel }: Confirma
           </div>
         </div>
         <DialogFooter className="gap-2">
-          <Button variant="outline" onClick={onCancel} className="w-full sm:w-auto rounded-xl">
-            Jeszcze nie
+          <Button variant="outline" onClick={onCancel} disabled={sending} className="w-full sm:w-auto rounded-xl">
+            Jeszcze nie wiem
           </Button>
-          <Button onClick={onConfirm} className="w-full sm:w-auto rounded-xl">
-            Tak, ruszam!
+          <Button onClick={onConfirm} disabled={sending} className="w-full sm:w-auto rounded-xl">
+            {sending ? <Loader2 className="animate-spin" /> : null}
+            {sending ? "Wysyłanie…" : "Tak!"}
           </Button>
         </DialogFooter>
       </DialogContent>

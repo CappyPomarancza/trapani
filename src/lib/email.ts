@@ -24,7 +24,7 @@ export async function sendEmail({ from, to, days }: SendEmailPayload) {
     from_date: fromFormatted,
     to_date: toFormatted,
     days_count: days,
-    subject: `🧳 Ucieczka: ${fromFormatted} – ${toFormatted}`,
+    subject: `🎂 Sto lat: ${fromFormatted} – ${toFormatted}`,
   }
 
   if (!TO_EMAIL) {
