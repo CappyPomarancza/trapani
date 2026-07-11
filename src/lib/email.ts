@@ -5,6 +5,7 @@ import { pl } from "date-fns/locale"
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const TO_EMAIL = import.meta.env.VITE_EMAILJS_TO_EMAIL
 
 emailjs.init(PUBLIC_KEY)
 
@@ -19,11 +20,16 @@ export async function sendEmail({ from, to, days }: SendEmailPayload) {
   const toFormatted = format(to, "d MMMM yyyy", { locale: pl })
 
   const payload = {
-    to_email: "kacperres@gmail.com",
+    to_email: TO_EMAIL || "kacperres@gmail.com",
     from_date: fromFormatted,
     to_date: toFormatted,
     days_count: days,
     subject: `🧳 Ucieczka: ${fromFormatted} – ${toFormatted}`,
+  }
+
+  if (!TO_EMAIL) {
+    console.warn("EmailJS brakuje adresu docelowego — payload:", payload)
+    return
   }
 
   if (!PUBLIC_KEY || !SERVICE_ID || !TEMPLATE_ID) {
